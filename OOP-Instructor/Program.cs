@@ -6,6 +6,37 @@
         // press CTRL-K, C
         // To uncomment, CTRL-K, U
 
+        List<string> compositionNotes = new List<string>();
+        List<string> compositionDurations = new List<string>();
+
+        compositionNotes.Add("D#");  // 250
+        compositionDurations.Add("1/4");
+
+        compositionNotes.Add("A");   // 500
+        compositionDurations.Add("1/2");
+
+        compositionNotes.Add("C");   // 250
+        compositionDurations.Add("1/4");
+
+        string enteredNote = compositionNotes[2];
+        string enteredDuration = compositionDurations[2];
+
+        int frequency = 0;
+
+        if (enteredNote == "C")
+        {
+            frequency = 277;
+        }
+        else if (enteredNote == "D")
+        {
+            frequency = 293;
+        }
+
+        Console.Beep(frequency, 500);
+    }
+
+    private static void Challenge_8_9_10()
+    {
         List<int> numbers = new List<int>();
 
         while (true)
