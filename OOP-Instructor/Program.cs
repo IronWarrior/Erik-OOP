@@ -6,6 +6,46 @@
         // press CTRL-K, C
         // To uncomment, CTRL-K, U
 
+        //int num0 = 0;
+        //int num1 = 2;
+        //int num2 = 49;
+        //int num3 = 3;
+
+        //Console.WriteLine(num0);
+        //Console.WriteLine(num1);
+        //Console.WriteLine(num2);
+        //Console.WriteLine(num3);
+
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    if (i == 0)
+        //        Console.WriteLine(num0);
+        //    else if (i == 1)
+        //        Console.WriteLine(num1);
+        //}
+
+        List<int> numbers = new List<int>();
+        numbers.Add(15);    // 0
+        numbers.Add(77);    // 1
+        numbers.Add(49);    // 2
+        numbers.Add(16);    // 2
+        numbers.Add(11);    // 2
+        numbers.Add(77);    // 2
+
+        int i = 0;
+
+        numbers.RemoveAt(2);
+
+        while (i < numbers.Count)
+        {
+            Console.WriteLine(numbers[i]);
+
+            i++;
+        }
+    }
+
+    private static void Lesson2()
+    {
         // GuessingGame();
 
         // Console.Beep(440, 1000);
@@ -21,19 +61,19 @@
         //    Console.WriteLine(i);
         //}
 
-        Console.WriteLine("Please enter a name and a number.");
+        //Console.WriteLine("Please enter a name and a number.");
 
-        string name = Console.ReadLine();
-        int number = int.Parse(Console.ReadLine());
+        //string name = Console.ReadLine();
+        //int number = int.Parse(Console.ReadLine());
 
-        int i = 0;
+        //int i = 0;
 
-        while (i < number)
-        {
-            Console.WriteLine(name);
+        //while (i < number)
+        //{
+        //    Console.WriteLine(name);
 
-            i++;
-        }
+        //    i++;
+        //}
     }
 
     private static void GuessingGame()
