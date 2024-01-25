@@ -6,6 +6,45 @@
         // press CTRL-K, C
         // To uncomment, CTRL-K, U
 
+        List<int> numbers = new List<int>();
+
+        while (true)
+        {
+            Console.WriteLine("Please enter a number.");
+            int input = int.Parse(Console.ReadLine());
+
+            numbers.Add(input);
+
+            int i = 0;
+
+            Console.WriteLine("Your numbers are...");
+
+            while (i < numbers.Count)
+            {
+                Console.WriteLine(numbers[i]);
+
+                i++;
+            }
+
+            Console.WriteLine();
+
+            int sum = 0;
+            i = 0;
+
+            while (i < numbers.Count)
+            {
+                sum += numbers[i];
+                // sum = sum + numbers[i];
+
+                i++;
+            }
+
+            Console.WriteLine($"The sum of all numbers entered is: {sum}");
+        }
+    }
+
+    private static void Lesson3()
+    {
         //int num0 = 0;
         //int num1 = 2;
         //int num2 = 49;
