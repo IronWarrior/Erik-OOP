@@ -28,18 +28,39 @@
 
             Console.WriteLine();
 
-            int sum = 0;
+            // Ask the user if they want a sum or product.
+            Console.WriteLine("Do you want a sum or product?");
+
+            string operation = Console.ReadLine();
+
+            int result = 0;
+
+            if (operation == "sum")
+            {
+                result = 0;
+            }
+            else if (operation == "product")
+            {
+                result = 1;
+            }
+
             i = 0;
 
             while (i < numbers.Count)
             {
-                sum += numbers[i];
-                // sum = sum + numbers[i];
+                if (operation == "sum")
+                {
+                    result += numbers[i];
+                }
+                else if (operation == "product")
+                {
+                    result *= numbers[i];
+                }
 
                 i++;
             }
 
-            Console.WriteLine($"The sum of all numbers entered is: {sum}");
+            Console.WriteLine($"The sum of all numbers entered is: {result}");
         }
     }
 
