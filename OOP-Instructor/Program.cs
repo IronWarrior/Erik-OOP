@@ -2,6 +2,82 @@
 {
     private static void Main()
     {
+        // string course = ".-----.-----......-----";
+
+        // char[] chars = { 'A', 'B', 'C' };
+
+        //int i = 0;
+
+        //while (i < course.Length)
+        //{
+        //    Console.Write(course[i]);
+        //    i++;
+        //}
+
+        //for (int i = 0; i < course.Length; i++)
+        //{
+        //    if (i == 2)
+        //    {
+        //        Console.Write("A");
+        //    }
+        //    else
+        //    {
+        //        Console.Write(course[i]);
+        //    }
+        //}
+
+        string sentence = "The quick brown fox jumps over the lazy dog";
+
+        while (true)
+        {
+            Console.WriteLine("Enter a character to replace with X");
+            char c = Console.ReadLine()[0];
+
+            for (int i = 0; i < sentence.Length; i++)
+            {
+                if (sentence[i] == c)
+                {
+                    Console.Write("X");
+                }
+                else
+                {
+                    Console.Write(sentence[i]);
+                }
+            }
+
+            //string newSentence = sentence.Replace(c, "X");
+
+            //for (int i = 0; i < newSentence.Length; i++)
+            //{
+            //    Console.Write(newSentence[i]);
+            //}
+        }
+
+        //for (int i = 0; i < sentence.Length; i++)
+        //{
+        //    Console.Write(sentence[i]);
+        //    Thread.Sleep(50);
+        //}
+
+        //foreach (char c in sentence)
+        //{
+        //    Console.Write(c);
+        //    Thread.Sleep(50);
+        //}
+
+        //Console.Clear();
+
+        //while (true)
+        //{
+        //    Console.WriteLine("Hello!");
+        //    Thread.Sleep(500);
+        //}
+
+        //Console.WriteLine(course);
+    }
+
+    private static void ComposerExploration()
+    {
         // To block comment, select all the code you want commented,
         // press CTRL-K, C
         // To uncomment, CTRL-K, U
