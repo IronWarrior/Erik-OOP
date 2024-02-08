@@ -2,7 +2,104 @@
 
 class Program
 {
+    struct Vector2
+    {
+        public float X;
+        public float Y;
+    }
+
+    class Lifeform
+    {
+
+    }
+
+    class Mammal : Lifeform
+    {
+
+    }
+
+    class Human : Mammal
+    {
+
+    }
+
+    class Lavender : Human
+    {
+
+    }
+
+    class Felipe : Human
+    {
+
+    }
+
+    class Shape
+    {
+        public Vector2 Center;
+    }
+
+    // Circle
+    // float radius
+    // circumference?
+    //  -- circumference is implicit if you have radius
+    // Vector2 center
+    class Circle : Shape
+    {
+        public float Radius;
+        
+        // public float circumference;
+
+        public float Circumference()
+        {
+            return (float)(Math.PI * 2 * Radius);
+        }
+    }
+
+    class Rectangle : Shape
+    {
+        public float Length, Width;
+
+        public float Area()
+        {
+            return Length * Width;
+        }
+    }
+
+    class Square : Shape
+    {
+        public float Length;
+
+        public float Area()
+        {
+            return Length * Length;
+        }
+    }
+
     private static void Main()
+    {
+        //int x;
+        //x = 0;
+
+        Vector2 position;
+        position.X = 1;
+        position.Y = 2;
+
+        // We create a new instance of Circle.
+        // An "instance" is an entity that has been
+        // instantiated in the "world" and now exists.
+        Circle myCircle = new Circle();
+        myCircle.Radius = 2;
+        myCircle.Center.Y = 1;
+        myCircle.Center.X = 1.5f;
+
+        Console.WriteLine(myCircle.Circumference());
+
+        myCircle.Radius = 10000;
+
+        Console.WriteLine(myCircle.Circumference());
+    }
+
+    static void FuntionsExamples()
     {
         List<string> list = new List<string>() { "Hello", "Goodbye", "Farewell", "Good day", "Good evening" };
 
