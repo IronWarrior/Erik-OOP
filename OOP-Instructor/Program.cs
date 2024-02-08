@@ -1,4 +1,6 @@
-﻿class Program
+﻿using System.Numerics;
+
+class Program
 {
     private static void Main()
     {
@@ -10,7 +12,6 @@
         Console.WriteLine(result);
 
         Console.WriteLine(result == "Hello, Goodbye, Farewell, Good day, Good evening, ");
-
 
         //for (int i = 0; i < list.Count; i++)
         //{
@@ -40,6 +41,30 @@
         //{
         //    Console.WriteLine(list[i]);
         //}
+    }
+
+    static T CalculateAreaGeneric<T>(T width, T height) where T : INumber<T>
+    {
+        return width * height;
+    }
+
+    static float CalculateArea(float width, float height)
+    {
+        return width * height;
+    }
+
+    static float Average(int[] numbers)
+    {
+        float sum = 0;
+
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            sum += numbers[i];
+        }
+
+        float result = sum / numbers.Length;
+
+        return result;
     }
 
     static void PrintList(List<string> list)
