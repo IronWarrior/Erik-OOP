@@ -2,6 +2,69 @@
 {
     private static void Main()
     {
+        List<string> list = new List<string>() { "Hello", "Goodbye", "Farewell", "Good day", "Good evening" };
+
+        // PrintList(list);
+
+        string result = CreateStringFromList(list);
+        Console.WriteLine(result);
+
+        Console.WriteLine(result == "Hello, Goodbye, Farewell, Good day, Good evening, ");
+
+
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    Console.WriteLine(list[i]);
+        //}
+
+        list.Add("Bonjour");
+
+        Console.WriteLine();
+        Console.WriteLine();
+
+        PrintList(list);
+
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    Console.WriteLine(list[i]);
+        //}
+
+        list.RemoveAt(0);
+
+        Console.WriteLine();
+        Console.WriteLine();
+
+        PrintList(list);
+
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    Console.WriteLine(list[i]);
+        //}
+    }
+
+    static void PrintList(List<string> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            Console.WriteLine(list[i]);
+        }
+    }
+
+    static string CreateStringFromList(List<string> list)
+    {
+        string str = "";
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            str += list[i];
+            str += ", ";
+        }
+
+        return str;
+    }
+
+    private static void ThreadsAndSleep()
+    {
         // string course = ".-----.-----......-----";
 
         // char[] chars = { 'A', 'B', 'C' };
