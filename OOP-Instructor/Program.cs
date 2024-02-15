@@ -2,6 +2,113 @@
 
 class Program
 {
+    private static void Main()
+    {
+
+    }
+
+    // World consists of racers and a course.
+    class Runner
+    {
+        public char Glyph;
+        public int Position;
+    }
+
+    class Race
+    {
+        public string Course;
+
+        public List<Runner> Runners = new List<Runner>();
+
+        public string Draw()
+        {
+            string result = "";
+
+            for (int i = 0; i < Course.Length; i++)
+            {
+                bool isSomeRunnerOnTile = false;
+
+                foreach (Runner runner in Runners)
+                {
+                    if (runner.Position == i)
+                    {
+                        result += runner.Glyph;
+
+                        isSomeRunnerOnTile = true;
+
+                        // Exit the foreach loop, but NOT the outer for loop.
+                        break;
+                    }
+                }
+
+                if (isSomeRunnerOnTile == false)
+                {
+                    result += Course[i];
+                }
+            }
+
+            return result;
+        }
+
+        public void Step()
+        {
+            Random rand = new Random();
+
+            foreach (Runner runner in Runners)
+            {
+                char tile = Course[runner.Position];
+
+                float chanceToMoveForwards = 0;
+
+                if (tile == '-')
+                {
+                    chanceToMoveForwards = 0.25f;
+                }
+                else if (tile == '.')
+                {
+                    chanceToMoveForwards = 0.125f;
+                }
+
+                float roll = rand.NextSingle();
+
+                if (roll < chanceToMoveForwards)
+                {
+                    runner.Position += 1;
+                }
+            }
+        }
+    }
+
+    private static void RaceMain()
+    {
+        // "Naive" solution is basically the first one to come
+        // to your head without applying any extra thought.
+        //string course = "---....---...-----...---";
+
+        //char racer0Glyph = 'A';
+        //int racer0Position = 0;
+
+        Runner runnerA = new Runner() { Glyph = 'A' };
+        Runner runnerB = new Runner() { Glyph = 'B' };
+
+        Race race = new Race();
+        race.Course = "---....---...-----...---";
+        race.Runners.Add(runnerA);
+        race.Runners.Add(runnerB);
+
+        runnerA.Position = 7;
+        runnerB.Position = 12;
+
+        while (true)
+        {
+            race.Step();
+
+            Console.WriteLine(race.Draw());
+
+            Console.ReadLine();
+        }
+    }
+
     struct Vector2
     {
         public float X;
@@ -75,7 +182,16 @@ class Program
         }
     }
 
-    private static void Main()
+    class Damageable
+    {
+        public event Action OnTakeDamage;
+
+        public void TakeDamage()
+        {
+        }
+    }
+
+    private static void Objects()
     {
         //int x;
         //x = 0;
