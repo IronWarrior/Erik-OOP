@@ -2,9 +2,46 @@
 
 class Program
 {
+    struct Position
+    {
+        public int x, y;
+    }
+
+    class Character
+    {
+        public Position position;
+        public string name;
+
+        public void Move(Direction direction)
+        {
+            if (direction == Direction.Up)
+            {
+                position.y += 1;
+            }
+            // ...and so on...
+        }
+
+        public override string ToString()
+        {
+            return $"{name} is at {position.x}, {position.y}";
+        }
+    }
+
+    enum Direction { Up, Down, Left, Right }
+
     private static void Main()
     {
+        Direction someDirection = Direction.Up;
+    }
 
+    class Match
+    {
+        int scoreA, scoreB;
+
+        public void WriteToFile()
+        {
+
+        }
     }
 
     // World consists of racers and a course.
@@ -12,6 +49,11 @@ class Program
     {
         public char Glyph;
         public int Position;
+
+        public override string ToString()
+        {
+            return $"{Glyph} at position {Position}";
+        }
     }
 
     class Race
