@@ -27,6 +27,22 @@
     {
         public int X, Y;
 
+        public Position(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public static Position operator +(Position a, Position b)
+        {
+            return new Position(a.X + b.X, a.Y + b.Y);
+        }
+
+        public static Position operator -(Position a, Position b)
+        {
+            return new Position(a.X - b.X, a.Y - b.Y);
+        }
+
         public override string ToString()
         {
             return $"({X}, {Y})";
@@ -41,6 +57,16 @@
 
     public static void Run()
     {
+
+        Position posA = new Position(5, 12);
+        Position posB = new Position(1, 2);
+
+        Position posC = posA + posB;
+
+        Console.WriteLine(posC);
+
+        return;
+
         // "const" = "constant". This keyword restricts this variable
         // from being changed after its initial value is set.
         // This is nice to do, as the board size does not change in neither
@@ -85,14 +111,35 @@
             Position targetPosition = piece.Pos;
 
             // If we are attempting an input, increment the target position appropriately.
-            if (key == ConsoleKey.UpArrow)
-                targetPosition.Y -= 1;
-            else if (key == ConsoleKey.DownArrow)
-                targetPosition.Y += 1;
-            else if (key == ConsoleKey.LeftArrow)
-                targetPosition.X -= 1;
-            else if (key == ConsoleKey.RightArrow)
+            //if (key == ConsoleKey.UpArrow)
+            //    targetPosition.Y -= 1;
+            //else if (key == ConsoleKey.DownArrow)
+            //    targetPosition.Y += 1;
+            //else if (key == ConsoleKey.LeftArrow)
+            //    targetPosition.X -= 1;
+            //else if (key == ConsoleKey.RightArrow)
+            //    targetPosition.X += 1;
+
+            if (key == ConsoleKey.E)
+            {
                 targetPosition.X += 1;
+                targetPosition.Y -= 1;
+            }
+            else if (key == ConsoleKey.Q)
+            {
+                targetPosition.Y -= 1;
+                targetPosition.X -= 1;
+            }
+            else if (key == ConsoleKey.Z)
+            {
+                targetPosition.Y += 1;
+                targetPosition.X -= 1;
+            }
+            else if (key == ConsoleKey.C)
+            {
+                targetPosition.Y += 1;
+                targetPosition.X += 1;
+            }
 
             // Check if the target position is within the bounds of the board.
             // (i.e., not negative and below the size of the board).
@@ -101,8 +148,22 @@
             {
                 piece.Pos = targetPosition;
             }
-        }
-       
+        }       
     }
+
+    // Stub function that could return a piece at the supplied position,
+    // if there is no piece, return null.
+    private static Piece IsPieceAtTile(Position position)
+    {
+        return null;
+    }
+
+    /*
+     * Challenge 20 sub-problems
+     * Need to support having multiple pieces on the board
+     * Need to be able to remove a piece at will
+     * Might be nice to have a function to check if a tile contains a piece, and
+     * tell us which piece it contains.
+     */
 }
 
