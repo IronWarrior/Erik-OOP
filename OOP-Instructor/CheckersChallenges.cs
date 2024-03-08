@@ -19,6 +19,12 @@
     class Piece
     {
         public Position Pos;
+        public char Glyph;
+
+        public Piece(char glyph)
+        {
+            Glyph = glyph;
+        }
     }
 
     // We expect to work with 2D coordinates a lot in our board games,
@@ -26,6 +32,8 @@
     struct Position
     {
         public int X, Y;
+
+        public static readonly Position Zero = new Position(0, 0);
 
         public Position(int x, int y)
         {
@@ -43,6 +51,16 @@
             return new Position(a.X - b.X, a.Y - b.Y);
         }
 
+        public static bool operator ==(Position a, Position b)
+        {
+            return a.X == b.X && a.Y == b.Y;
+        }
+
+        public static bool operator !=(Position a, Position b)
+        {
+            return (a == b) == false;
+        }
+
         public override string ToString()
         {
             return $"({X}, {Y})";
@@ -57,15 +75,13 @@
 
     public static void Run()
     {
+        // Operator overloading example.
+        //Position posA = new Position(5, 12);
+        //Position posB = new Position(1, 2);
 
-        Position posA = new Position(5, 12);
-        Position posB = new Position(1, 2);
+        //Position posC = posA + posB;
 
-        Position posC = posA + posB;
-
-        Console.WriteLine(posC);
-
-        return;
+        //Console.WriteLine(posC);
 
         // "const" = "constant". This keyword restricts this variable
         // from being changed after its initial value is set.
@@ -73,7 +89,14 @@
         // checkers nor chess.
         const int boardSize = 8;
 
-        Piece piece = new Piece();
+        Piece player = new Piece('P');
+        Piece enemy = new Piece('E');
+        enemy.Pos = new Position(5, 5);
+
+        List<Piece> pieces = new List<Piece>();
+
+        pieces.Add(player);
+        pieces.Add(enemy);
 
         while (true)
         {
@@ -84,17 +107,30 @@
                 // Print each tile in the row.
                 for (int x = 0; x < boardSize; x++)
                 {
+                    bool isOccupied = false;
+
+                    Console.Write("[");
+
                     // Check if our piece is sitting on the tile we are
                     // about to draw. If it is, draw an X inside the tile.
                     // Otherwise, draw the tile as normal.
-                    if (x == piece.Pos.X && y == piece.Pos.Y)
+                    foreach (Piece piece in pieces)
                     {
-                        Console.Write("[X]");
+                        if (piece.Pos == new Position(x, y))
+                        {
+                            Console.Write(piece.Glyph);
+
+                            isOccupied = true;
+                            break;
+                        }
                     }
-                    else
-                    {
-                        Console.Write("[ ]");
+
+                    if (isOccupied == false)
+                    { 
+                        Console.Write(" ");
                     }
+
+                    Console.Write("]");
                 }
 
                 // Print out a newline to skip to a new row.
@@ -108,7 +144,7 @@
             // Create a variable to store where we are *requesting* our piece
             // to move. We initialize it to be the piece's current position,
             // since all moves will be offsets from where it currently is.
-            Position targetPosition = piece.Pos;
+            Position direction = Position.Zero;
 
             // If we are attempting an input, increment the target position appropriately.
             //if (key == ConsoleKey.UpArrow)
@@ -121,32 +157,51 @@
             //    targetPosition.X += 1;
 
             if (key == ConsoleKey.E)
-            {
-                targetPosition.X += 1;
-                targetPosition.Y -= 1;
-            }
+                direction = new Position(1, -1);
             else if (key == ConsoleKey.Q)
-            {
-                targetPosition.Y -= 1;
-                targetPosition.X -= 1;
-            }
+                direction = new Position(-1, -1);
             else if (key == ConsoleKey.Z)
-            {
-                targetPosition.Y += 1;
-                targetPosition.X -= 1;
-            }
+                direction = new Position(-1, 1);
             else if (key == ConsoleKey.C)
-            {
-                targetPosition.Y += 1;
-                targetPosition.X += 1;
-            }
+                direction = new Position(1, 1);
 
-            // Check if the target position is within the bounds of the board.
-            // (i.e., not negative and below the size of the board).
-            if (targetPosition.X >= 0 && targetPosition.X < boardSize
-                && targetPosition.Y >= 0 && targetPosition.Y < boardSize)
+            // Did the user enter in a direction at all?
+            if (direction != Position.Zero)
             {
-                piece.Pos = targetPosition;
+                Position targetPosition = player.Pos + direction;
+
+                // Check if the target position is within the bounds of the board.
+                // (i.e., not negative and below the size of the board).
+                if (targetPosition.X >= 0 && targetPosition.X < boardSize
+                    && targetPosition.Y >= 0 && targetPosition.Y < boardSize)
+                {
+                    Piece occupyingPiece = null;
+
+                    foreach (Piece piece in pieces)
+                    {
+                        if (piece.Pos == targetPosition)
+                        {
+                            occupyingPiece = piece;
+                            break;
+                        }
+                    }
+
+                    if (occupyingPiece == null)
+                    {
+                        player.Pos += direction;
+                    }
+                    // If the current tile is occupied, capture the piece on the tile,
+                    // and then continue one more tile forward in the target direction.
+                    else
+                    {
+                        player.Pos += direction + direction;
+
+                        // Note that we might jump off the board here, if the enemy is at the corner;
+                        // TODO: How can we restructure our logic to avoid this?
+
+                        pieces.Remove(occupyingPiece);
+                    }
+                }
             }
         }       
     }
