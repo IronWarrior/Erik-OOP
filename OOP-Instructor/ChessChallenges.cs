@@ -3,7 +3,7 @@ using System.Numerics;
 
 class ChessChallenges
 {
-    class Piece
+    abstract class Piece
     {
         public Vector2 Pos;
         public char Glyph;
@@ -12,18 +12,66 @@ class ChessChallenges
         {
             Glyph = glyph;
         }
+
+        public abstract List<Vector2> CalculateMovements();
     }
 
+    class Knight : Piece
+    {
+        public Knight(char glyph) : base(glyph)
+        {
+        }
+
+        public override List<Vector2> CalculateMovements()
+        {
+            List<Vector2> movements =
+            [
+                Pos + new Vector2(1, -2),
+                Pos - new Vector2(2, -1),
+                Pos + new Vector2(2, -1),
+                Pos - new Vector2(1, -2),
+                Pos + new Vector2(1, 2),
+                Pos - new Vector2(2, 1),
+                Pos + new Vector2(2, 1),
+                Pos - new Vector2(1, 2),
+            ];
+
+            return movements;
+        }
+    }
+
+    class King : Piece
+    {
+        public King(char glyph) : base(glyph)
+        {
+        }
+
+        public override List<Vector2> CalculateMovements()
+        {
+            List<Vector2> movements =
+            [
+                Pos + new Vector2(1, 0),
+                Pos + new Vector2(-1, 0),
+                Pos + new Vector2(0, 1),
+                Pos + new Vector2(0, -1),
+
+                Pos + new Vector2(1, 1),
+                Pos + new Vector2(-1, 1),
+                Pos + new Vector2(1, -1),
+                Pos + new Vector2(-1, -1),
+            ];
+
+            return movements;
+        }
+    }
 
     public static void Run()
     {
         const int boardSize = 8;
 
         List<Piece> pieces = new List<Piece>();
-        List<Vector2> movements = new List<Vector2>();
 
-        Piece player = new Piece('X');
-
+        Piece player = new King('X');
 
         pieces.Add(player);
 
@@ -31,17 +79,7 @@ class ChessChallenges
         {
             Console.Clear();
 
-            movements.Clear();
-
-            movements.Add(player.Pos + new Vector2(0, 1));
-            movements.Add(player.Pos - new Vector2(0, 1));
-            movements.Add(player.Pos + new Vector2(1, 0));
-            movements.Add(player.Pos - new Vector2(1, 0));
-
-            movements.Add(player.Pos + new Vector2(1, 1));
-            movements.Add(player.Pos + new Vector2(-1, 1));
-            movements.Add(player.Pos + new Vector2(1, -1));
-            movements.Add(player.Pos + new Vector2(-1, -1));
+            List<Vector2> movements = player.CalculateMovements();
 
             for (int y = 0; y < boardSize; y++)
             {
@@ -74,7 +112,9 @@ class ChessChallenges
                         {
                             if (movement == currentTile)
                             {
-                                Console.Write('O');
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                Console.Write('#');
+                                Console.ResetColor();
 
                                 isOccupied = true;
                                 break;

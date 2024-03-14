@@ -52,37 +52,37 @@
     // differently from the "inside".
 
     // Polymorphism by COMPOSITION
-    public class Animal
-    {
-        public string Noise;
+    //public class Animal
+    //{
+    //    public string Noise;
 
-        public void MakeNoise()
+    //    public void MakeNoise()
+    //    {
+    //        Console.WriteLine(Noise);
+    //    }
+    //}
+
+    // Polymorphism by INHERITENCE
+    public abstract class Animal
+    {
+        public abstract void MakeNoise();
+    }
+
+    public class Dog : Animal
+    {
+        public override void MakeNoise()
         {
-            Console.WriteLine(Noise);
+            Console.WriteLine("BARK!");
         }
     }
 
-    // Polymorphism by INHERITENCE
-    //public abstract class Animal
-    //{
-    //    public abstract void MakeNoise();
-    //}
-
-    //public class Dog : Animal
-    //{
-    //    public override void MakeNoise()
-    //    {
-    //        Console.WriteLine("BARK!");
-    //    }
-    //}
-
-    //public class Horse : Animal
-    //{
-    //    public override void MakeNoise()
-    //    {
-    //        Console.WriteLine("NEIEIGIGH!");
-    //    }
-    //}
+    public class Horse : Animal
+    {
+        public override void MakeNoise()
+        {
+            Console.WriteLine("NEIEIGIGH!");
+        }
+    }
 
     //public class PokemonType
     //{
@@ -92,31 +92,31 @@
 
     //public class Bulbasaur : PokemonType
     //{
-              
+
     //}
 
     public static void Run()
     {
-        Animal horse = new Animal() { Noise = "NEIIIGH" };
-
-        List<Animal> animals =
-            [
-                horse,
-                horse,
-                horse,
-            ];
+        //Animal horse = new Animal() { Noise = "NEIIIGH" };
 
         //List<Animal> animals =
-        //[
-        //    new Horse(),
-        //    new Horse(),
-        //    new Dog(),
-        //];
+        //    [
+        //        horse,
+        //        horse,
+        //        horse,
+        //    ];
 
-        foreach (Animal animal in animals)
-        {
-            animal.MakeNoise();
-        }
+        ////List<Animal> animals =
+        ////[
+        ////    new Horse(),
+        ////    new Horse(),
+        ////    new Dog(),
+        ////];
+
+        //foreach (Animal animal in animals)
+        //{
+        //    animal.MakeNoise();
+        //}
     }
 }
 
