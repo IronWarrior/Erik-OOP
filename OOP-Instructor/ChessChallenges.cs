@@ -1,8 +1,7 @@
-﻿using System;
-using System.Numerics;
-
-class ChessChallenges
+﻿class ChessChallenges
 {
+    const int BoardSize = 8;
+
     abstract class Piece
     {
         public Vector2 Pos;
@@ -65,9 +64,36 @@ class ChessChallenges
         }
     }
 
+    class Rook : Piece
+    {
+        public Rook(char glyph) : base(glyph)
+        {
+        }
+
+        public override List<Vector2> CalculateMovements()
+        {
+            List<Vector2> movements = new List<Vector2>();
+
+            for (int i = 0; i < BoardSize; i++)
+            {
+                Vector2 y = new Vector2(i, Pos.Y);
+
+                if (y != Pos)
+                    movements.Add(y);
+
+                Vector2 x = new Vector2(Pos.X, i);
+
+                if (x != Pos)
+                    movements.Add(x);
+            }
+
+            return movements;
+        }
+    }
+
     public static void Run()
     {
-        const int boardSize = 8;
+
 
         List<Piece> pieces = new List<Piece>();
 
@@ -81,10 +107,10 @@ class ChessChallenges
 
             List<Vector2> movements = player.CalculateMovements();
 
-            for (int y = 0; y < boardSize; y++)
+            for (int y = 0; y < BoardSize; y++)
             {
                 // Print each tile in the row.
-                for (int x = 0; x < boardSize; x++)
+                for (int x = 0; x < BoardSize; x++)
                 {
                     Vector2 currentTile = new Vector2(x, y);
 
