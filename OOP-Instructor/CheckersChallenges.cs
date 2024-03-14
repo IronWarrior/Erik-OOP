@@ -18,7 +18,7 @@
 
     class Piece
     {
-        public Position Pos;
+        public Vector2 Pos;
         public char Glyph;
 
         public Piece(char glyph)
@@ -29,43 +29,6 @@
 
     // We expect to work with 2D coordinates a lot in our board games,
     // so we create a custom data type to hold these.
-    struct Position
-    {
-        public int X, Y;
-
-        public static readonly Position Zero = new Position(0, 0);
-
-        public Position(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public static Position operator +(Position a, Position b)
-        {
-            return new Position(a.X + b.X, a.Y + b.Y);
-        }
-
-        public static Position operator -(Position a, Position b)
-        {
-            return new Position(a.X - b.X, a.Y - b.Y);
-        }
-
-        public static bool operator ==(Position a, Position b)
-        {
-            return a.X == b.X && a.Y == b.Y;
-        }
-
-        public static bool operator !=(Position a, Position b)
-        {
-            return (a == b) == false;
-        }
-
-        public override string ToString()
-        {
-            return $"({X}, {Y})";
-        }
-    }
 
     /*
      * [ ][ ][ ] 
@@ -91,7 +54,7 @@
 
         Piece player = new Piece('P');
         Piece enemy = new Piece('E');
-        enemy.Pos = new Position(5, 5);
+        enemy.Pos = new Vector2(5, 5);
 
         List<Piece> pieces = new List<Piece>();
 
@@ -116,7 +79,7 @@
                     // Otherwise, draw the tile as normal.
                     foreach (Piece piece in pieces)
                     {
-                        if (piece.Pos == new Position(x, y))
+                        if (piece.Pos == new Vector2(x, y))
                         {
                             Console.Write(piece.Glyph);
 
@@ -144,7 +107,7 @@
             // Create a variable to store where we are *requesting* our piece
             // to move. We initialize it to be the piece's current position,
             // since all moves will be offsets from where it currently is.
-            Position direction = Position.Zero;
+            Vector2 direction = Vector2.Zero;
 
             // If we are attempting an input, increment the target position appropriately.
             //if (key == ConsoleKey.UpArrow)
@@ -157,18 +120,18 @@
             //    targetPosition.X += 1;
 
             if (key == ConsoleKey.E)
-                direction = new Position(1, -1);
+                direction = new Vector2(1, -1);
             else if (key == ConsoleKey.Q)
-                direction = new Position(-1, -1);
+                direction = new Vector2(-1, -1);
             else if (key == ConsoleKey.Z)
-                direction = new Position(-1, 1);
+                direction = new Vector2(-1, 1);
             else if (key == ConsoleKey.C)
-                direction = new Position(1, 1);
+                direction = new Vector2(1, 1);
 
             // Did the user enter in a direction at all?
-            if (direction != Position.Zero)
+            if (direction != Vector2.Zero)
             {
-                Position targetPosition = player.Pos + direction;
+                Vector2 targetPosition = player.Pos + direction;
 
                 // Check if the target position is within the bounds of the board.
                 // (i.e., not negative and below the size of the board).
@@ -182,6 +145,7 @@
                         if (piece.Pos == targetPosition)
                         {
                             occupyingPiece = piece;
+                            // "break" exits whatever loop you are in.
                             break;
                         }
                     }
@@ -208,7 +172,7 @@
 
     // Stub function that could return a piece at the supplied position,
     // if there is no piece, return null.
-    private static Piece IsPieceAtTile(Position position)
+    private static Piece IsPieceAtTile(Vector2 position)
     {
         return null;
     }

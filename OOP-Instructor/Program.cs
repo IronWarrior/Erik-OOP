@@ -4,7 +4,7 @@ class Program
 {
     private static void Main()
     {
-        CheckersChallenges.Run();
+        ChessChallenges.Run();
     }
 
     struct Position
