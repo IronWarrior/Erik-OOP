@@ -6,6 +6,7 @@
     {
         public Vector2 Pos;
         public char Glyph;
+        public Func<List<Vector2>> GetMovements;
 
         public Piece(char glyph)
         {
@@ -91,13 +92,19 @@
         }
     }
 
+    public static List<Vector2> CalculateRookMovements()
+    {
+        List<Vector2> movements = new List<Vector2>();
+        return movements;
+    }
+
     public static void Run()
     {
-
-
         List<Piece> pieces = new List<Piece>();
 
         Piece player = new King('X');
+
+        player.GetMovements = CalculateRookMovements;
 
         pieces.Add(player);
 
