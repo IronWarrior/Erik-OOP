@@ -13,6 +13,8 @@ public class Spawner : MonoBehaviour
     private void Repeating()
     {
         //                                                    "default rotation"
+        //                                                      an "identity" is some value (A), which when multiplied
+        //                                                      by a second value (B), results in B.
         Object.Instantiate(objectToClone, transform.position, Quaternion.identity);
     }
 }
