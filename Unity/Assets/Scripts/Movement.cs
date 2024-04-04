@@ -4,6 +4,8 @@ public class Movement : MonoBehaviour
 {
     public Transform target;
 
+    public float speed = 2;
+
     // When is this function run?
     // Unity calls this every frame.
     // 10 frames per second - 1 / 10 = 0.1
@@ -20,7 +22,10 @@ public class Movement : MonoBehaviour
         // GetComponent<Transform>().position += Vector3.right;
 
         //                                    1 / framerate
-        transform.position += directionLengthOne * 10 * Time.deltaTime;
+        transform.position -= directionLengthOne * speed * Time.deltaTime;
+
+        // (0, 0, 0)
+        // (0.000001f, 0.00001f, 0.00001f)
 
         float distance = Vector3.Distance(transform.position, targetPosition);
 
@@ -28,7 +33,7 @@ public class Movement : MonoBehaviour
         if (distance < 0.5f)
         {
             // A reference to the game object this script is attached to.
-            Destroy(gameObject);
+            Object.Destroy(gameObject);
         }
     }
 }
