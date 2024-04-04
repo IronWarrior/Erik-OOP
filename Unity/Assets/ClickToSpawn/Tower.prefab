@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 2020956088314162439}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4787953178230146646}
@@ -114,8 +114,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4787953178230146646}
+  - component: {fileID: 569929231568882620}
   m_Layer: 0
-  m_Name: Cubefab
+  m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,3 +138,16 @@ Transform:
   - {fileID: 5325220831437832370}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &569929231568882620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8466671360645266107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61f89d1da91318458f3da45f73d05d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: []
