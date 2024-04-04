@@ -562,6 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa85d7204cd07ef47827c918adcdafd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 8466671360645266107, guid: 04789d1e06d12ea41a5b59fb8c015931, type: 3}
   cam: {fileID: 2120413945}
 --- !u!4 &1997256184
 Transform:
