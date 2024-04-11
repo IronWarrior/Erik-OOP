@@ -1,18 +1,31 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerFiring : MonoBehaviour
 {
     public GameObject projectilePrefab;
 
-    public List<GameObject> enemies;
+    public Enemy[] enemies;
+
+    // public const string EnemyTag = "Enemy";
 
     private void Start()
     {
-        GameObject closestEnemy = null;
+        enemies = FindObjectsOfType<Enemy>();
+
+        //GameObject[] roots = SceneManager.GetActiveScene().GetRootGameObjects();
+
+        //foreach (GameObject root in roots)
+        //{
+        //    if (root.tag == EnemyTag)
+        //    {
+        //        enemies.Add(root);
+        //    }
+        //}
+
+        Enemy closestEnemy = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach (GameObject enemy in enemies)
+        foreach (Enemy enemy in enemies)
         {
             // float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
