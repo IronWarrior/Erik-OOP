@@ -8,50 +8,63 @@ public class TowerFiring : MonoBehaviour
 
     // public const string EnemyTag = "Enemy";
 
-    private void Start()
+    private bool canFire = true;
+
+    private float lastFireTime;
+
+    private void Update()
     {
-        enemies = FindObjectsOfType<Enemy>();
-
-        //GameObject[] roots = SceneManager.GetActiveScene().GetRootGameObjects();
-
-        //foreach (GameObject root in roots)
-        //{
-        //    if (root.tag == EnemyTag)
-        //    {
-        //        enemies.Add(root);
-        //    }
-        //}
-
-        Enemy closestEnemy = null;
-        float closestDistance = Mathf.Infinity;
-
-        foreach (Enemy enemy in enemies)
+        if (Time.time > lastFireTime + 2f)
+        //if (canFire == true)
         {
-            // float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            enemies = FindObjectsOfType<Enemy>();
 
-            Vector3 direction = transform.position - enemy.transform.position;
+            //GameObject[] roots = SceneManager.GetActiveScene().GetRootGameObjects();
 
-            float distance = direction.magnitude;
+            //foreach (GameObject root in roots)
+            //{
+            //    if (root.tag == EnemyTag)
+            //    {
+            //        enemies.Add(root);
+            //    }
+            //}
 
-            if (distance < closestDistance)
+            Enemy closestEnemy = null;
+            float closestDistance = Mathf.Infinity;
+
+            foreach (Enemy enemy in enemies)
             {
-                closestEnemy = enemy;
-                closestDistance = distance;
+                // float distance = Vector3.Distance(transform.position, enemy.transform.position);
+
+                Vector3 direction = transform.position - enemy.transform.position;
+
+                float distance = direction.magnitude;
+
+                if (distance < closestDistance)
+                {
+                    closestEnemy = enemy;
+                    closestDistance = distance;
+                }
+            }
+
+            if (closestEnemy != null)
+            {
+                GameObject spawnedProjectile = Instantiate(projectilePrefab, transform.position + Vector3.up, Quaternion.identity);
+
+                spawnedProjectile.GetComponent<Projectile>().target = closestEnemy.transform;
+
+                Debug.DrawLine(transform.position, closestEnemy.transform.position, Color.red, 1f);
+
+                lastFireTime = Time.time;
+
+                // canFire = false;
+                // Invoke(nameof(ResetFiring), 2f);
             }
         }
+    }
 
-        if (closestEnemy != null)
-        {
-            GameObject spawnedProjectile = Instantiate(projectilePrefab, transform.position + Vector3.up, Quaternion.identity);
-
-            spawnedProjectile.GetComponent<Projectile>().target = closestEnemy.transform;
-
-            Debug.DrawLine(transform.position, closestEnemy.transform.position, Color.red, 1f);
-        }
-
-        // For every enemy...
-        // Measure the distance from the tower to the enemy
-        // Find which is closest
-        // Perform the "fire" action at the enemy
+    private void ResetFiring()
+    {
+        canFire = true;
     }
 }
